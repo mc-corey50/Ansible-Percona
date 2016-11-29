@@ -1,0 +1,14 @@
+---
+# defaults file for percona
+percona_version: '5.5'
+percona_data_dir: '/data/mysql'
+percona_bin_log_dir: '/log/data/mysql'
+percona_bin_log: 'mysql-bin'
+percona_relay_log: 'mysql-relay-log'
+percona_log_dir: '/var/log/mysql'
+percona_error_log: 'mysql-error.log'
+percona_slow_log: 'mysql-slow.log'
+percona_innodb_buffer_pool_size: '1G'
+percona_mysql_server_id: '1'
+percona_mysql_read_only: '0'
+percona_server_sync_binlog: '1'

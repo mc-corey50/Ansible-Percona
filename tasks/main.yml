@@ -1,0 +1,3 @@
+---
+# tasks file for percona
+- include: percona-server.tasks.yml --tags=percona,percona:server

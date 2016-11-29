@@ -1,0 +1,22 @@
+language: ruby
+cache: bundler
+sudo: false
+services: docker
+
+rvm:
+  - 2.3.0
+
+env:
+  global:
+    - KITCHEN_YAML=.kitchen.travis.yml
+
+script:
+  - bundle exec kitchen verify percona-server-ubuntu-1404
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+  on_success: always
+
+branches:
+  only:
+  - master
