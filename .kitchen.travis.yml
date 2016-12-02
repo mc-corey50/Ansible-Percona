@@ -8,13 +8,15 @@ provisioner:
   sudo_command: sudo -E -H
   require_pip: true
   ansible_verbose: true
-  ansible_verbosity: 1
+  ansible_verbosity: 2
   ansible_version: 2.2.0.0
   require_chef_for_busser: false
   require_ruby_for_busser: true
+  root_path: '/tmp/kitchen'
   additional_copy_path: playbooks
   ansible_connection: ssh
-  roles_path: .
+  ansible_cfg_path: ansible.cfg
+  roles_path: '.'
   playbook: site.yml
 
 platforms:
@@ -31,7 +33,15 @@ verifier:
 
 suites:
   - name: percona_server
+    driver:
+      instance_name: percona-server
+      hostname: percona-server.container
     provisioner:
-    playbook: test/integration/percona_server/percona_server_test.yml
-    additional_copy_path:
-      - "."
+      ansible_extra_flags: '--tags=serverdb'
+
+  - name: percona_xtradb
+    driver:
+      instance_name: percona-xtradb
+      hostname: percona-xtradb.container
+    provisioner:
+      ansible_extra_flags: '--tags=xtradb'

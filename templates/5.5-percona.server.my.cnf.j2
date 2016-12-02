@@ -3,8 +3,8 @@
 [mysqld]
 
 # GENERAL #
-user                           = mysql
-default_storage_engine         = InnoDB
+user                           = {{ percona_db_user }}
+default_storage_engine         = {{ percona_default_storage_engine }}
 
 
 # SAFETY #
@@ -16,7 +16,7 @@ slave_transaction_retries      = 60
 datadir={{ percona_data_dir }}
 
 # BINARY LOGGING #
-log_bin                        = {{ percona_bin_log_dir }}/{{ percona_bin_log }}
+log_bin                        = {{ percona_bin_log }}
 expire_logs_days               = 14
 sync_binlog                    = {{ percona_server_sync_binlog }}
 binlog_format                  = ROW
@@ -48,10 +48,10 @@ innodb_flush_neighbor_pages=none
 innodb_read_ahead = none
 
 # LOGGING # percona_server_log_dir
-log_error                      = {{ percona_log_dir }}/{{ percona_error_log }}
+log_error                      = {{ percona_error_log }}
 log_queries_not_using_indexes  = 1
 slow_query_log                 = 1
-slow_query_log_file            = {{ percona_log_dir }}/{{ percona_slow_log }}
+slow_query_log_file            = {{ percona_slow_log }}
 
 # Custom Parameters
 transaction-isolation = READ-COMMITTED
@@ -62,6 +62,6 @@ read-only        = {{ percona_mysql_read_only }}
 # replication
 server_id={{ percona_mysql_server_id }}
 skip-slave-start
-relay-log = {{ percona_bin_log_dir }}/{{ percona_relay_log }}
+relay-log = {{ percona_relay_log }}
 log-slave-updates
 relay-log-recovery = 1
