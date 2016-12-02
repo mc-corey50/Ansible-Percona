@@ -1,6 +1,6 @@
 galaxy_info:
   author: Richard Lopez
-  description: Installs percona server, percona client, and percona toolkit.
+  description: Installs percona xtradb, percona server, percona client, and percona toolkit.
   company: Meta.Red, LLC
   license: Apache 2.0
   min_ansible_version: 2.0
