@@ -10,8 +10,12 @@ env:
   global:
     - KITCHEN_YAML=.kitchen.travis.yml
 
+  matrix:
+    - TEST_SUITE=percona-server-ubuntu-1404
+    - TEST_SUITE=percona-xtradb-ubuntu-1404
+
 script:
-  - bundle exec kitchen verify percona-server-ubuntu-1404
+  - bundle exec kitchen verify ${TEST_SUITE}
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
