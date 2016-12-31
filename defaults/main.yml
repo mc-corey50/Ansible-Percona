@@ -3,6 +3,7 @@
 
 # percona server & xtradb common variables
 percona_version: '5.5'
+
 percona_db_user: mysql
 percona_default_storage_engine: InnoDB
 percona_data_dir: /data/mysql
@@ -11,6 +12,7 @@ percona_error_log: "{{ percona_log_dir }}/mysql-error.log"
 percona_slow_log: "{{ percona_log_dir }}/mysql-slow.log"
 
 # percona server variables
+percona_server_version_pin: "{{ percona_version }}=5.5.53-rel38.5-1.trusty"
 percona_bin_log_dir: /log/data/mysql
 percona_bin_log: "{{ percona_bin_log_dir }}/mysql-bin"
 percona_relay_log: "{{ percona_bin_log_dir }}/mysql-relay-log"
@@ -20,6 +22,7 @@ percona_mysql_read_only: '0'
 percona_server_sync_binlog: '1'
 
 # percona xtradb variables
+percona_xtradb_version_pin: "{{ percona_version }}=5.5.41-25.12-855.trusty"
 percona_wsrep_sst_auth: test_user:test_pass
 percona_binlog_format: ROW
 percona_wsrep_provider: /usr/lib/libgalera_smm.so

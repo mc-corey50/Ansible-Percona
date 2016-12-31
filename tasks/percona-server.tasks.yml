@@ -1,57 +1,58 @@
 ---
 - name: add percona apt key
-  apt_key: keyserver=keyserver.ubuntu.com id=8507EFA5 state=present
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 8507EFA5
+    state: present
 
 - name: add percona repository
-  apt_repository: repo='deb http://repo.percona.com/apt trusty main' state=present
-
-- name: update apt cache
-  apt: update_cache=yes
+  apt_repository:
+    repo: 'deb http://repo.percona.com/apt trusty main'
+    state: present
 
 - name: install percona packages
-  apt: pkg={{ item }} state=present update_cache=yes
+  apt:
+    name: "{{ item }}"
+    install_recommends: no
+    state: present
   with_items:
-    - percona-server-client-{{ percona_version }}
-    - percona-server-server-{{ percona_version }}
+    - percona-server-client-{{ percona_server_version_pin }}
+    - percona-server-server-{{ percona_server_version_pin }}
     - percona-toolkit
+    - python-mysqldb
   environment:
     DEBIAN_FRONTEND: noninteractive
 
-- name: create Percona data dir
+- name: create Percona dirs
   file:
-    path: "{{ percona_data_dir }}"
+    path: "{{ item }}"
     state: directory
     owner: mysql
     group: mysql
-    mode: '0755'
-    recurse: yes
-
-- name: create Percona binlog dir
-  file:
-    path: "{{ percona_bin_log_dir }}"
-    state: directory
-    owner: mysql
-    group: mysql
-    mode: '0755'
-    recurse: yes
-
-- name: create Percona info log dir
-  file:
-    path: "{{ percona_log_dir }}"
-    state: directory
-    owner: mysql
-    group: mysql
-    mode: '0755'
-    recurse: yes
+    mode: 0755
+  with_items:
+    - "{{ percona_data_dir }}"
+    - "{{ percona_bin_log_dir }}"
+    - "{{ percona_log_dir }}"
 
 - name: create percona configuration file
-  template: src={{ percona_version }}-percona.server.my.cnf.j2 dest=/etc/mysql/my.cnf mode=600
+  template:
+    src: "{{ percona_version }}-percona.server.my.cnf.j2"
+    dest: /etc/mysql/my.cnf
+    mode: 0600
 
 - name: create Mysql schema
-  command: /usr/bin/mysql_install_db --defaults-file=/etc/mysql/my.cnf creates={{ percona_data_dir }}/mysql/user.frm
+  command: /usr/bin/mysql_install_db --defaults-file=/etc/mysql/my.cnf
+  args:
+    creates: "{{ percona_data_dir }}/mysql/user.frm"
 
 - name: create custom mysql start script
-  copy: src=mysql_startup.bash dest=/etc/init.d/mysql owner=root group=root mode=0755
+  copy:
+    src: mysql_startup.bash
+    dest: /etc/init.d/mysql
+    owner: root
+    group: root
+    mode: 0755
 
 - name: start percona service
   service: name=mysql enabled=yes state=started
