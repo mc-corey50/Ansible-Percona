@@ -2,7 +2,7 @@ Percona Ansible Role
 ====================
 [![Build Status](https://travis-ci.org/MetaRed/percona_ansible_role.svg?branch=master)](https://travis-ci.org/MetaRed/percona_ansible_role)
 [![License: Apache](https://img.shields.io/badge/License-Apache_2.0-red.svg)](http://www.apache.org/licenses/LICENSE-2.0)
-[![Ansible Role: version](https://img.shields.io/badge/Ansible Role-v0.0.2-blue.svg)](https://github.com/MetaRed/percona_ansible_role/releases/tag/v0.0.2)
+[![Ansible Role: version](https://img.shields.io/badge/Ansible Role-v0.0.3-blue.svg)](https://github.com/MetaRed/percona_ansible_role/releases/tag/v0.0.3)
 
 
 Ansible role installs percona xtradb, percona server, percona client, and percona toolkit.
