@@ -37,11 +37,11 @@ suites:
       instance_name: percona-server
       hostname: percona-server.container
     provisioner:
-      ansible_extra_flags: '--tags=serverdb'
+      ansible_extra_flags: '--tags=percona-server'
 
   - name: percona_xtradb
     driver:
       instance_name: percona-xtradb
       hostname: percona-xtradb.container
     provisioner:
-      ansible_extra_flags: '--tags=xtradb'
+      ansible_extra_flags: '--tags=percona-xtradb'
