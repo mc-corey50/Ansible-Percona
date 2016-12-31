@@ -26,6 +26,16 @@ Role Variables
     <td><tt>5.5</tt></td>
   </tr>
   <tr>
+    <td><tt>{{ percona_server_version_pin }}</tt></td>
+    <td>percona server version pin</td>
+    <td><tt>5.5.53-rel38.5-1.trusty</tt></td>
+  </tr>
+  <tr>
+    <td><tt>{{ percona_xtradb_version_pin }}</tt></td>
+    <td>percona xtradb version pin</td>
+    <td><tt>5.5.41-25.12-855.trusty</tt></td>
+  </tr>
+  <tr>
     <td><tt>{{ percona_db_user }}</tt></td>
     <td>percona system user</td>
     <td><tt>mysql</tt></td>
@@ -58,7 +68,7 @@ Role Variables
   </table>
 
 `Server`: used exclusively by percona server tasks.
-  <table>
+<table>
   <tr>
     <th>Server</th>
     <th>Description</th>
@@ -117,11 +127,6 @@ Role Variables
   <td><tt>{{ percona_binlog_format }}</tt></td>
   <td>binary log format</td>
   <td><tt>ROW</tt></td>
-</tr>
-<tr>
-  <td><tt>{{ percona_wsrep_provider }}</tt></td>
-  <td>galera library</td>
-  <td><tt>/usr/lib/libgalera_smm.so</tt></td>
 </tr>
 <tr>
   <td><tt>{{ percona_innodb_locks_unsafe_for_binlog }}</tt></td>
@@ -274,18 +279,23 @@ Galaxy Playbook Usage
 #### Tags
 `percona`: Run both percona server and percona xtradb task lists.
 
-`serverdb`: Run only percona server tasks.
+`percona-server`: Run only percona server tasks.
 
-`xtradb`: Run only percona xtradb tasks.
+`percona-xtradb`: Run only percona xtradb tasks.
 
 ```bash
 
 ansible-playbook site.yml --tags=percona
 
 ```
+
+
 Testing
 -------
+
 `ServerSpec`: Integration test directories
+
+
 ```
 
 test/integration/percona_server
