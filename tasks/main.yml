@@ -1,7 +1,7 @@
 ---
 # tasks file for percona
 - include: percona-server.tasks.yml
-  tags: [percona,serverdb]
+  tags: [percona,percona-server]
 
 - include: percona-xtradb.tasks.yml
-  tags: [percona,xtradb]
+  tags: [percona,percona-xtradb]
