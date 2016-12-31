@@ -19,10 +19,6 @@ describe package('percona-xtradb-cluster-server-5.5') do
 end
 
 describe 'Percona XTRADB Cluster 5.5 config parameters' do
-  context mysql_config('wsrep-provider') do
-    its(:value) { should eq '/usr/lib/libgalera_smm.so' }
-  end
-
   context mysql_config('default-storage-engine') do
     its(:value) { should eq 'InnoDB' }
   end
